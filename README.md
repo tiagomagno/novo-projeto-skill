@@ -28,3 +28,7 @@ Gera `CLAUDE.md`, `docs/` (PRODUTO, NEGOCIO, ARQUITETURA, DESIGN, VISAO, TASKS, 
 ## Instalação
 
 Copie esta pasta para o diretório de skills do Claude (por exemplo `~/.claude/skills/novo-projeto`).
+
+## Licença
+
+MIT. Veja o arquivo [LICENSE](LICENSE).
