@@ -14,11 +14,18 @@ A estrutura é o esquema de fundo; a conversa é a interface. A pessoa pode cheg
 
 ## Blocos e perguntas
 
+### 0. Porte e perfil (sempre a primeira pergunta; ver `perfis.md`)
+- É um site ou página simples, um protótipo? Um app ou sistema com login e dados guardados? Ou um sistema usado por várias empresas, com planos e permissões?
+- É do zero ou evolui algo que já existe?
+
+A resposta fixa o perfil e, com ele, quais blocos e aprofundamentos (`entrevista-aprofundada.md`) entram. Não faça perguntas de plataforma a quem tem um site de uma página.
+
 ### 1. Negócio (alimenta `PRODUTO.md`)
 - Qual problema isso resolve, e para quem?
 - Como essas pessoas resolvem isso hoje? (Alternativas, concorrentes, planilha, papel.)
 - Por que trocariam pela solução nova? O que seria o diferencial?
-- Como saber que deu certo? (Uma ou duas métricas simples.)
+- Como saber que deu certo? (Uma ou duas métricas simples.) Separe: o resultado que o negócio quer, o que a pessoa que usa quer conseguir, e como o sistema entrega isso. Se não há números, registre "meta a definir" (❓), não invente.
+- O que precisa existir na primeira versão (MVP), o que pode esperar e o que **não** será feito agora?
 - O cliente final quer pagar, usar de graça, ou é uso interno?
 
 Esta é a **pergunta de validação de mercado**: quem já resolve o problema e o que faria o cliente trocar. Não pule: ela melhora a ideia antes de gastar código.
@@ -45,12 +52,15 @@ Surgem dos fluxos. Para cada passo importante: "E se acontecer X?", "Tem limite,
 - Algum app ou site de que gostam do jeito ou do visual?
 - O cliente já tem logo, cores ou manual de marca? Já tem design system? Em que formato (Figma, código, só logo)?
 
-A partir dos fluxos já levantados, **proponha a lista de telas** e peça confirmação; ninguém deve listar telas do zero. Assuma mobile-first.
+A partir dos fluxos já levantados, **proponha a lista de telas** e peça confirmação; ninguém deve listar telas do zero. Assuma mobile-first. Quem não souber nomear telas costuma saber descrever **ações**: peça "o que a pessoa faz, em que ordem, o que aparece e o que acontece se der errado" e derive as telas e os estados (vazio, sem resultados, erro, sem permissão) dessa descrição.
+
+**Design system:** pergunte se já existe e em que formato; se não existir, conduza as perguntas guia de `design-system.md` ("Quando não há nada") como parte da entrevista, propondo valores a partir do público e do tom.
 
 ### 5. Qualidade (alimenta requisitos não funcionais de `PRODUTO.md`)
 - O que não pode falhar nem demorar para o cliente final?
 - Lida com dados pessoais, pagamentos ou algo sensível?
 - Precisa ser encontrado no Google? (Se sim, cria a seção de SEO.)
+- Perfis 2 e 3: classifique o risco (baixo, médio, alto) e siga o bloco E de `entrevista-aprofundada.md` (segurança, privacidade e LGPD proporcionais).
 
 Converta as respostas em metas mensuráveis ("o checkout não pode demorar" vira "carregar em menos de 3 s no 4G; checkout em até 3 cliques"). Marque 💡 as metas que você propôs.
 
@@ -64,6 +74,8 @@ Só aqui, e geralmente **proposto por você** com base no que foi dito. Pergunte
 - Quais serviços precisam conectar (GitHub, Jira, Slack, Figma, banco)? Alimenta `.mcp.json`.
 - Haverá deploy? Onde? (Se sim, cria `skills/deploy/`.)
 - Sistema operacional do time (relevante para os hooks; ver `templates-claude.md`).
+- Estratégia de Git e ambientes: siga o porte (`perfis.md`) e o bloco G de `entrevista-aprofundada.md`. Não crie branches, commits nem PRs sem pedido; registre a escolha em `DECISOES.md`.
+- Perfis 2 e 3: papéis e permissões (A), várias empresas e planos (B), ciclo de vida (C), integrações (D) e dados (F) em `entrevista-aprofundada.md`.
 
 ## Modos B e C
 
@@ -71,4 +83,4 @@ Nos modos B e C, parte dos blocos 2, 3 e 6 já pode ser levantada lendo o reposi
 
 ## Fechamento da entrevista
 
-Ao terminar, **não** gere arquivos. Siga para o **relatório do plano** (`relatorio-plano.md`), que traz o resumo (problema, público, diferencial, MVP, camadas, regras, fluxos e telas, stack, o que está em 💡/❓) e tudo o que será criado ou alterado. Ajustes pedidos nesse relatório são baratos; ajustes depois da geração custam retrabalho.
+Ao terminar, **não** gere arquivos. Confira se os blocos do perfil foram cobertos (o que não se aplica foi avaliado e registrado, não omitido). Siga para o **relatório do plano** (`relatorio-plano.md`), que traz o resumo (problema, público, diferencial, MVP, camadas, regras, fluxos e telas, stack, o que está em 💡/❓) e tudo o que será criado ou alterado. Ajustes pedidos nesse relatório são baratos; ajustes depois da geração custam retrabalho.

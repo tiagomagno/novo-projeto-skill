@@ -4,6 +4,8 @@ O objetivo é documentar e padronizar sem perder nada do que já existe e sem in
 
 ## Regras comuns
 
+- **Porte primeiro.** A primeira pergunta continua sendo o porte (`perfis.md`): um projeto existente pequeno não ganha a documentação de uma plataforma. O perfil é confirmado com o usuário, não deduzido só do tamanho do código.
+- **IDs existentes.** Se o projeto já usa outro esquema de IDs, mantenha-o e proponha a migração para o esquema de `perfis.md` no relatório do plano; só renumere com confirmação.
 - **Somente leitura primeiro.** Faça o inventário inteiro antes de criar ou alterar qualquer arquivo.
 - **Nada some.** Todo conteúdo útil de documentos antigos é preservado, com a origem anotada (`origem: README.md`).
 - **Nunca sobrescrever sem confirmar.** Mostre o que muda e espere o ok. Originais só são movidos para `docs/_legado/` com confirmação; sem confirmação, ficam onde estão.
