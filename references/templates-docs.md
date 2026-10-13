@@ -2,6 +2,8 @@
 
 Use estes modelos como esqueleto. Preencha apenas com o que se sabe, marcando a certeza (✅ confirmado, 💡 hipótese, ❓ em aberto). Seção sem informação fica com **uma linha ❓**, nunca com texto de enchimento. Remova seções que não se aplicam ao projeto.
 
+**Perfil e seções avançadas.** Estes são os modelos-base. O perfil do projeto (`perfis.md`) decide quais **seções avançadas** de `templates-avancados.md` entram (catálogo de funcionalidades, matriz de permissões, transições de estado, dicionário de dados, inventário de integrações, segurança, navegação, estados de interface, tokens em camadas). **IDs:** `FEAT-01`, `RN-01`, `E-01`, `SCR-01`, `API-01`, `INT-01`, tarefa `fase.tarefa`, `TEST-01` (ver `perfis.md`).
+
 ## Sumário
 1. Cabeçalho comum
 2. PRODUTO.md
@@ -35,9 +37,9 @@ flowchart LR
 <Ordem de construção em poucas linhas, ex.: "telas (fase 4) dependem do modelo e do motor (fases 3 e 5)".>
 
 ## 4. Matriz de cobertura
-| Regra (RN) | Camada | Tarefas |
-|---|---|---|
-| RN1 | | 2.0, 2.1 |
+| Regra (RN) | Camada | Tarefas | Testes (perfil 3 e regras críticas) |
+|---|---|---|---|
+| RN-01 | | 2.0, 2.1 | TEST-01 |
 
 ## 5. Como a estrutura foi organizada (só reestruturação)
 <De onde veio cada coisa: o que foi movido, mesclado ou preservado, com a data.>
@@ -83,14 +85,16 @@ Emojis de título sugeridos: 🎯 Produto · 🧩 Negócio · 🏛️ Arquitetur
 |---|---|---|---|
 
 ## 6. Funcionalidades do MVP
+(Perfil 2 e 3: use o catálogo por módulo de `templates-avancados.md`, seção 1.1, com prioridade MVP / pós-MVP / futuro / fora de escopo.)
 | # | Funcionalidade | Prioridade | Certeza |
 |---|---|---|---|
-| F1 | | 🔴 Alta | |
+| FEAT-01 | | 🔴 Alta | |
 
 ## 7. Fora do escopo (por enquanto)
 - 
 
 ## 8. Métricas de sucesso
+(Perfil 2 e 3: separe objetivo de negócio, do usuário e funcional; ver `templates-avancados.md`, seção 1.2. Meta sem dados: "a definir" ❓.)
 | Métrica | Meta | Como medir | Certeza |
 |---|---|---|---|
 
@@ -121,12 +125,13 @@ Emojis de título sugeridos: 🎯 Produto · 🧩 Negócio · 🏛️ Arquitetur
 ## 2. Regras de negócio
 | ID | Regra | Origem | Certeza |
 |---|---|---|---|
-| RN1 | <ex.: pedido só pode ser cancelado antes do envio> | <quem disse / arquivo> | ✅ |
+| RN-01 | <ex.: pedido só pode ser cancelado antes do envio> | <quem disse / arquivo> | ✅ |
 
 ## 3. Modelo de domínio
+(Papéis, matriz de permissões, organizações, transições de estado, dicionário de dados e regras de persistência: seções avançadas em `templates-avancados.md`, seção 2. Banco é condicional: só se o projeto tiver.)
 | ID | Entidade | Campos principais | Status possíveis | Certeza |
 |---|---|---|---|---|
-| E1 | <Pedido> | id, cliente, itens, total | pendente, enviado, entregue, cancelado | 💡 |
+| E-01 | <Pedido> | id, cliente, itens, total | pendente, enviado, entregue, cancelado | 💡 |
 
 **Relações:** <Cliente 1:N Pedido; Pedido 1:N Item; ...>
 
@@ -167,6 +172,7 @@ flowchart LR
 Regra: não criar pastas novas sem registrar aqui.
 
 ## 4. Integrações externas
+(Perfil 2 e 3: inventário detalhado `INT-nn`, segurança, ambientes e migrações em `templates-avancados.md`, seção 3.)
 | Serviço | Para quê | Configuração | Certeza |
 |---|---|---|---|
 
@@ -194,9 +200,10 @@ Decisões de arquitetura e seus motivos ficam em `DECISOES.md`, não aqui.
 - Tom de voz dos textos: <...>
 
 ## 4. Mapa de telas
+(Antes do mapa, perfil 2 e 3: navegação, estados da interface, responsividade e patterns/templates em `templates-avancados.md`, seção 4.)
 | ID | Tela | Fluxo | Prioridade | Tarefa | Status |
 |---|---|---|---|---|---|
-| T1 | | | 🔴 | | ⬜ Não iniciada |
+| SCR-01 | | | 🔴 | | ⬜ Não iniciada |
 
 Ficha opcional por tela (quando valer a pena): objetivo em uma frase · quem acessa e de qual fluxo vem · ações principais e secundárias · link do frame no Figma.
 
@@ -242,16 +249,16 @@ Ficha opcional por tela (quando valer a pena): objetivo em uma frase · quem ace
 | # | Tarefa | Itens | Prioridade | Status | Pronto quando | Concluída em |
 |---|---|---|---|---|---|---|
 | 2.0 | Fundação: <padrão de rotas, erros, validação, autenticação> | — | 🔴 | ⬜ Não iniciada | | — |
-| 2.1 | <Módulo de acesso: cadastro, login, sessão> | E1 | 🔴 | ⬜ Não iniciada | | — |
+| 2.1 | <Módulo de acesso: cadastro, login, sessão> | E-01 | 🔴 | ⬜ Não iniciada | | — |
 
 ## Fase 3: Telas
 | # | Tarefa | Itens | Prioridade | Status | Pronto quando | Concluída em |
 |---|---|---|---|---|---|---|
 | 3.0 | Fundação visual: tokens e componentes base | — | 🔴 | ⬜ Não iniciada | Botão, campo, cartão e navegação no padrão do design system | — |
-| 3.1 | <Fluxo de acesso> | T1, T2, T3 | 🔴 | ⬜ Não iniciada | 360 px, 4 estados, revisada e testada no celular | — |
+| 3.1 | <Fluxo de acesso> | SCR-01, SCR-02, SCR-03 | 🔴 | ⬜ Não iniciada | 360 px, 4 estados, revisada e testada no celular | — |
 ```
 
-Status: ✅ Concluída · 🔄 Em andamento · ⬜ Não iniciada · ⏸️ Bloqueada. Os contadores do topo são **recalculados a partir das tabelas** a cada conclusão; nunca digitados à mão. Detalhes de agrupamento em `tarefas-e-fases.md`. Quando a tarefa tem spec (`docs/tarefas/<id>.md`), o "pronto quando" diz "ver spec" e os critérios vivem lá, sem duplicar.
+Dependências entram no "Pronto quando" como "Depende de 2.0". Status: ✅ Concluída · 🔄 Em andamento · ⬜ Não iniciada · ⏸️ Bloqueada. Os contadores do topo são **recalculados a partir das tabelas** a cada conclusão; nunca digitados à mão. Detalhes de agrupamento em `tarefas-e-fases.md`. Quando a tarefa tem spec (`docs/tarefas/<id>.md`), o "pronto quando" diz "ver spec" e os critérios vivem lá, sem duplicar.
 
 ---
 
@@ -286,7 +293,8 @@ Arquivo **curto** (cabe em uma tela), **reescrito inteiro** a cada tarefa conclu
 - **Decisão:** o que ficou definido
 - **Alternativas descartadas:** e por quê
 - **Tarefa relacionada:** <ID>
-- **Certeza:** ✅ confirmada / 💡 inferida do código
+- **Status:** ✅ Confirmada · 💡 Proposta · ❓ Pendente · 🚫 Descartada (com o motivo)
+- **Certeza da origem:** ✅ dita pelo usuário / 💡 inferida do código
 ```
 
 Log que **só acrescenta**: nunca reescreva o passado; se uma decisão mudar, acrescente uma entrada nova que a substitui e cite a anterior.
@@ -302,7 +310,7 @@ Criada sob demanda, para tarefas grandes ou ambíguas (ver `tarefas-e-fases.md`)
 
 | Tarefa | Itens | Fase | Status | Atualizado em |
 |---|---|---|---|---|
-| <ID> | <T1, T2 / E1 ...> | <fase> | 🔄 Em andamento | AAAA-MM-DD |
+| <ID> | <SCR-01, SCR-02 / E-01 ...> | <fase> | 🔄 Em andamento | AAAA-MM-DD |
 
 ## 1. Objetivo
 Como <ator>, quero <ação>, para <resultado>.
@@ -338,4 +346,4 @@ Como <ator>, quero <ação>, para <resultado>.
 - Decisões novas (registradas em DECISOES.md):
 ```
 
-Cada critério de aceite deve ser observável e testável; se não der para verificar, reescreva até dar. Critérios que dependem de regra de negócio citam o ID da regra (RN3).
+Cada critério de aceite deve ser observável e testável; se não der para verificar, reescreva até dar. Critérios que dependem de regra de negócio citam o ID da regra (RN-03).

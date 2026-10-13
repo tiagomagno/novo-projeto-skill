@@ -33,12 +33,17 @@ Preencha com dados reais do projeto. Nunca invente comandos, caminhos ou exemplo
 - Tarefas: docs/TASKS.md · Decisões: docs/DECISOES.md
 
 ## Fluxo de trabalho
-- Uma conversa por tarefa. Comece lendo a tarefa em docs/TASKS.md e só os documentos relevantes; marque-a como 🔄.
-- Ao concluir uma tarefa, **antes de declarar que terminou**: conferir o "pronto quando"; atualizar TASKS.md (✅, data, contadores) e o status dos itens cobertos; reescrever docs/ESTADO.md; registrar decisões novas em docs/DECISOES.md; sugerir commit com o ID da tarefa.
+- Uma tarefa por sessão (o contexto lido fica na sessão e é reenviado a cada mensagem; sessão longa gasta o limite de uso). Comece lendo a tarefa em docs/TASKS.md e só os documentos relevantes; marque-a como 🔄.
+- Ao concluir uma tarefa, **antes de declarar que terminou**: conferir o "pronto quando"; atualizar TASKS.md (✅, data, contadores) e o status dos itens cobertos; reescrever docs/ESTADO.md; registrar decisões novas em docs/DECISOES.md; sugerir commit com o ID da tarefa. **Depois de gravar tudo, avisar o usuário para rodar `/clear` antes da próxima tarefa.**
+- Se um requisito mudar: antes de editar, listar o que isso afeta (funcionalidades, regras, telas, dados, integrações, tarefas, testes), pedir o ok e atualizar todos os documentos afetados; a decisão antiga fica 🚫 descartada em docs/DECISOES.md.
 - Tarefa grande ou ambígua (fluxo crítico, regra de negócio nova, vários módulos): antes de implementar, criar a spec em docs/tarefas/<id>.md (objetivo sem tecnologia, critérios de aceite verificáveis, dúvidas ❓), resolver as dúvidas com o usuário e só então planejar e implementar.
 - Trabalho novo que surgir no meio vira tarefa nova com ID novo; não infle a tarefa atual.
 - Entregas que o usuário vê só ficam ✅ depois que ele testou.
 - Não invente: o que não se sabe fica ❓ em ESTADO.md.
+
+## Git
+- Estratégia do projeto: <só main | main + dev | feature/* → dev → pre-prod → main> (ver docs/DECISOES.md).
+- Não criar branches, commits nem PRs sem pedido do usuário; commits no formato `tipo(escopo): descrição`, citando o ID da tarefa.
 ```
 
 Mantenha o `CLAUDE.md` enxuto; o detalhe fica nos documentos. Em modo C, **mescle** com o `CLAUDE.md` existente em vez de substituir.
@@ -179,7 +184,8 @@ Conclua a tarefa $ARGUMENTS (ou a que está 🔄).
 3. Atualize o status dos itens cobertos (ex.: telas no mapa de telas de docs/DESIGN.md).
 4. Reescreva docs/ESTADO.md (curto).
 5. Acrescente decisões novas em docs/DECISOES.md.
-6. Sugira a mensagem de commit com o ID da tarefa.
+6. Sugira a mensagem de commit com o ID da tarefa (não commite).
+7. Só depois de tudo gravado, diga: "Tarefa concluída e registrada. Rode `/clear` antes da próxima."
 ```
 
 ### commands/especificar-tarefa.md
@@ -190,7 +196,7 @@ argument-hint: [id da tarefa, ex.: 3.1]
 ---
 Crie a spec da tarefa $ARGUMENTS em docs/tarefas/$ARGUMENTS.md. Não implemente nada.
 1. Leia a linha da tarefa em docs/TASKS.md e os documentos relevantes (PRODUTO, NEGOCIO, DESIGN, ARQUITETURA).
-2. Escreva primeiro o objetivo ("Como <ator>, quero <ação>, para <resultado>") e os critérios de aceite ("Dado..., quando..., então..."), **sem citar tecnologia**. Cada critério deve ser observável e testável; cite o ID da regra de negócio quando houver (RN3).
+2. Escreva primeiro o objetivo ("Como <ator>, quero <ação>, para <resultado>") e os critérios de aceite ("Dado..., quando..., então..."), **sem citar tecnologia**. Cada critério deve ser observável e testável; cite o ID da regra de negócio quando houver (RN-03).
 3. Liste o que ainda não se sabe como ❓ e pergunte ao usuário, até 3 perguntas por vez. Não planeje enquanto houver ❓ que mude o resultado.
 4. Só depois, escreva o plano curto (módulos e arquivos afetados, abordagem, riscos) e as subtarefas (ex.: $ARGUMENTSa, $ARGUMENTSb).
 5. Defina a verificação: o que é automático, o que o usuário confere manualmente.
@@ -214,8 +220,22 @@ Verifique:
 - Stack e pastas dos planos coerentes com ARQUITETURA.md.
 - Contadores e status de TASKS.md coerentes com ESTADO.md.
 - Itens ❓ que bloqueiam as próximas tarefas.
+- Telas (`SCR`) que usam ação sem funcionalidade (`FEAT`); dados exigidos que faltam no modelo (`E`); permissões na interface ausentes da matriz; integrações (`INT`) citadas na arquitetura e não especificadas; regras (`RN`) sem tarefa ou sem teste (perfil 3).
 - Contradições entre documentos.
 Entregue um relatório por gravidade (bloqueia / atenção / sugestão), com arquivo e trecho de cada achado e as perguntas que o usuário precisa responder.
+```
+
+### commands/mudanca.md
+```markdown
+---
+description: Analisa o impacto de uma mudança de requisito antes de editar
+argument-hint: [descrição da mudança]
+---
+Mudança: $ARGUMENTS. **Não edite nada ainda.**
+1. Liste o que a mudança afeta, seguindo os IDs: funcionalidades (FEAT) e regras (RN), telas (SCR) e estados, entidades (E) e transições, API/INT, tarefas em docs/TASKS.md (feitas e pendentes) e testes.
+2. Aponte contradições com decisões anteriores em docs/DECISOES.md.
+3. Mostre a lista ao usuário e peça o ok.
+4. Com o ok, atualize todos os artefatos afetados, marque a decisão antiga como 🚫 descartada com o motivo e crie IDs novos para tarefas já ✅ que precisem ser refeitas.
 ```
 
 ### commands/revisar-ux.md (só se houver interface)

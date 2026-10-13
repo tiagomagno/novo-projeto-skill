@@ -17,6 +17,33 @@ Aplique quando o projeto tem interface. O design system é uma **decisão com ca
 
 Todos os caminhos terminam igual: **tokens no código** + a seção "Design system" do `DESIGN.md` com origem, onde estão os tokens, componentes disponíveis e a regra de ouro: **usar apenas tokens e componentes existentes; nada de cor ou espaçamento avulso.**
 
+## Quando não há nada (caminho D) ou só há logo (caminho C): perguntas guia
+
+O design system não é só cor e fonte: tem **fundamentos**, **componentes**, **padrões** e **modelos de página**. Conduza em rodadas curtas (até 3 perguntas), em linguagem de negócio, **propondo valores** a partir do que a pessoa disser sobre público e tom (💡) e pedindo confirmação. Não faça todas as perguntas em projeto de perfil 1: bastam as de fundamentos.
+
+**Fundamentos (todos os perfis)**
+- Como a marca deve parecer: séria, acolhedora, técnica, divertida? Cite dois sites ou apps de que gosta.
+- Há cores da marca? Precisa de modo claro e escuro?
+- Algum tipo de letra preferido, ou posso propor um par (títulos e texto)?
+- O visual é mais denso (muita informação por tela) ou mais arejado?
+
+**Componentes e estados (perfil 2 e 3)**
+- Deduza a lista de componentes das telas aprovadas, sem criar os que ninguém usa: botões, campos, seleções, tabelas, cartões, menus, modais, avisos, navegação, filtros, gráficos.
+- Para cada componente, registre só as **variantes e estados que serão realmente usados**: padrão, foco, ativo, desativado, carregando; campo com erro, preenchido, somente leitura.
+
+**Padrões e modelos de página (perfil 2 e 3, com várias telas parecidas)**
+- Quais ações se repetem (cadastro em etapas, filtros de lista, confirmação de exclusão, estado vazio com ação)? Registre como **patterns** e diga quando usar cada um.
+- Quais estruturas de página se repetem (painel, lista, detalhe, formulário, configurações, autenticação)? Registre como **templates**.
+
+**Movimento e acessibilidade**
+- Haverá animações? Se sim, duração e curva padrão; respeitar a preferência de movimento reduzido.
+- Meta de acessibilidade (ex.: WCAG 2.1 AA): contraste, foco visível, navegação por teclado, rótulos e mensagens de erro claras, não depender só de cor.
+
+**Como registrar**
+- **Tokens em camadas:** primitivo (valor bruto) → semântico (intenção de uso) → componente. Convenção de nomes consistente (ver `templates-avancados.md`, seção 4.5).
+- Organização da documentação: Foundations → Components → Patterns → Templates.
+- Implementação: onde ficam os tokens, como viram variáveis CSS ou configuração do framework, e como conferir que o código segue a especificação (revisão do `design-reviewer`, e comparação com o Figma quando houver).
+
 ## Tailwind como base
 
 Verifique a versão do Tailwind no projeto: na v3 os tokens ficam em `tailwind.config`; na v4, no bloco `@theme` do CSS. Se o projeto não usa Tailwind e a equipe não exigir outra coisa, proponha como padrão (💡).
